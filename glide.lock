@@ -1,0 +1,28 @@
+hash: 8837fc58f761a4cf03a037c19c24744c7e403f8eabb66bfd2d24fec3dc47dd21
+updated: 2017-09-03T20:56:12.572763142+08:00
+imports:
+- name: github.com/mattn/go-colorable
+  version: ad5389df28cdac544c99bd7b9161a0b5b6ca9d1b
+- name: github.com/mattn/go-isatty
+  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+- name: github.com/valyala/bytebufferpool
+  version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
+- name: github.com/valyala/fasttemplate
+  version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
+- name: golang.org/x/sys
+  version: 7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce
+  subpackages:
+  - unix
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 04cdfd42973bb9c8589fd6a731800cf222fde1a9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 890a5c3458b43e6104ff5da8dfa139d013d77544
+  subpackages:
+  - assert
