@@ -1,5 +1,5 @@
 hash: 8837fc58f761a4cf03a037c19c24744c7e403f8eabb66bfd2d24fec3dc47dd21
-updated: 2017-09-03T20:56:12.572763142+08:00
+updated: 2017-09-03T21:50:32.051108501+08:00
 imports:
 - name: github.com/mattn/go-colorable
   version: ad5389df28cdac544c99bd7b9161a0b5b6ca9d1b
@@ -9,6 +9,11 @@ imports:
   version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/fasttemplate
   version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
+- name: golang.org/x/net
+  version: 66aacef3dd8a676686c7ae3716979581e8b03c47
+  subpackages:
+  - proxy
+  - publicsuffix
 - name: golang.org/x/sys
   version: 7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce
   subpackages:
