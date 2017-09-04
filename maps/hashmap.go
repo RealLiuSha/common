@@ -5,24 +5,21 @@
 // Structure is not thread safe.
 //
 // Reference: http://en.wikipedia.org/wiki/Associative_array
-package hashmap
+package maps
 
 import (
 	"fmt"
-	"github.com/itchenyi/common/maps"
 	"github.com/itchenyi/common/utils"
 )
 
 func assertMapImplementation() {
-	var _ maps.Map = (*HashMap)(nil)
+	var _ Map = (*HashMap)(nil)
 }
 
-type Map map[interface{}]interface{}
+type BaseMap map[interface{}]interface{}
 
 // Map holds the elements in go's native map
-type HashMap struct {
-	m map[interface{}]interface{}
-}
+type HashMap struct { m BaseMap }
 
 // New instantiates a hash map.
 func New() *HashMap {
