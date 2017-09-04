@@ -164,7 +164,7 @@ func sameElements(a []interface{}, b []interface{}) bool {
 	return true
 }
 
-func benchmarkGet(b *testing.B, m *Map, size int) {
+func benchmarkGet(b *testing.B, m *HashMap, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Get(n)
@@ -172,7 +172,7 @@ func benchmarkGet(b *testing.B, m *Map, size int) {
 	}
 }
 
-func benchmarkPut(b *testing.B, m *Map, size int) {
+func benchmarkPut(b *testing.B, m *HashMap, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Put(n, struct{}{})
@@ -180,7 +180,7 @@ func benchmarkPut(b *testing.B, m *Map, size int) {
 	}
 }
 
-func benchmarkRemove(b *testing.B, m *Map, size int) {
+func benchmarkRemove(b *testing.B, m *HashMap, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Remove(n)

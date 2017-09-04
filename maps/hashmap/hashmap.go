@@ -14,48 +14,50 @@ import (
 )
 
 func assertMapImplementation() {
-	var _ maps.Map = (*Map)(nil)
+	var _ maps.Map = (*HashMap)(nil)
 }
 
+type Map map[interface{}]interface{}
+
 // Map holds the elements in go's native map
-type Map struct {
+type HashMap struct {
 	m map[interface{}]interface{}
 }
 
 // New instantiates a hash map.
-func New() *Map {
-	return &Map{m: make(map[interface{}]interface{})}
+func New() *HashMap {
+	return &HashMap{m: make(map[interface{}]interface{})}
 }
 
 // Put inserts element into the map.
-func (m *Map) Put(key interface{}, value interface{}) {
+func (m *HashMap) Put(key interface{}, value interface{}) {
 	m.m[key] = value
 }
 
 // Get searches the element in the map by key and returns its value or nil if key is not found in map.
 // Second return parameter is true if key was found, otherwise false.
-func (m *Map) Get(key interface{}) (value interface{}, found bool) {
+func (m *HashMap) Get(key interface{}) (value interface{}, found bool) {
 	value, found = m.m[key]
 	return
 }
 
 // Remove removes the element from the map by key.
-func (m *Map) Remove(key interface{}) {
+func (m *HashMap) Remove(key interface{}) {
 	delete(m.m, key)
 }
 
 // Empty returns true if map does not contain any elements
-func (m *Map) Empty() bool {
+func (m *HashMap) Empty() bool {
 	return m.Size() == 0
 }
 
 // Size returns number of elements in the map.
-func (m *Map) Size() int {
+func (m *HashMap) Size() int {
 	return len(m.m)
 }
 
 // Keys returns all keys (random order).
-func (m *Map) Keys() []interface{} {
+func (m *HashMap) Keys() []interface{} {
 	keys := make([]interface{}, m.Size())
 	count := 0
 	for key := range m.m {
@@ -66,7 +68,7 @@ func (m *Map) Keys() []interface{} {
 }
 
 // Values returns all values (random order).
-func (m *Map) Values() []interface{} {
+func (m *HashMap) Values() []interface{} {
 	values := make([]interface{}, m.Size())
 	count := 0
 	for _, value := range m.m {
@@ -77,7 +79,7 @@ func (m *Map) Values() []interface{} {
 }
 
 // StringVal returns string value
-func (m *Map) StringVal(key interface{}) (val string) {
+func (m *HashMap) StringVal(key interface{}) (val string) {
 	if value, ok := m.Get(key); ok {
 		return value.(string)
 	}
@@ -86,7 +88,7 @@ func (m *Map) StringVal(key interface{}) (val string) {
 }
 
 // IntVal returns int value
-func (m *Map) IntVal(key interface{}) (val int) {
+func (m *HashMap) IntVal(key interface{}) (val int) {
 	if value, ok := m.Get(key); ok {
 		return value.(int)
 	}
@@ -95,7 +97,7 @@ func (m *Map) IntVal(key interface{}) (val int) {
 }
 
 // StringItems returns Json Format Item
-func (m *Map) StringItems() map[string]interface{} {
+func (m *HashMap) StringItems() map[string]interface{} {
 	elements := make(map[string]interface{})
 	for key, value := range m.m {
 		elements[utils.ToString(key)] = value
@@ -105,12 +107,12 @@ func (m *Map) StringItems() map[string]interface{} {
 }
 
 // Clear removes all elements from the map.
-func (m *Map) Clear() {
+func (m *HashMap) Clear() {
 	m.m = make(map[interface{}]interface{})
 }
 
 // String returns a string representation of container
-func (m *Map) String() string {
+func (m *HashMap) String() string {
 	str := "HashMap\n"
 	str += fmt.Sprintf("%v", m.m)
 	return str

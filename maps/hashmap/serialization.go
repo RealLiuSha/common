@@ -7,12 +7,12 @@ import (
 )
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*Map)(nil)
-	var _ containers.JSONDeserializer = (*Map)(nil)
+	var _ containers.JSONSerializer = (*HashMap)(nil)
+	var _ containers.JSONDeserializer = (*HashMap)(nil)
 }
 
 // ToJSON outputs the JSON representation of list's elements.
-func (m *Map) ToJSON() ([]byte, error) {
+func (m *HashMap) ToJSON() ([]byte, error) {
 	elements := make(map[string]interface{})
 	for key, value := range m.m {
 		elements[utils.ToString(key)] = value
@@ -21,7 +21,7 @@ func (m *Map) ToJSON() ([]byte, error) {
 }
 
 // FromJSON populates list's elements from the input JSON representation.
-func (m *Map) FromJSON(data []byte) error {
+func (m *HashMap) FromJSON(data []byte) error {
 	elements := make(map[string]interface{})
 	err := json.Unmarshal(data, &elements)
 	if err == nil {
