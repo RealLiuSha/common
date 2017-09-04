@@ -3,3 +3,4 @@ Common packages for Go
 - [Color](https://github.com/itchenyi/common/tree/master/color) - Style terminal text.
 - [Log](https://github.com/itchenyi/common/tree/master/log) - Simple logging.
 - [rest](https://github.com/itchenyi/common/tree/master/rest) - Rest Http Client
+- [hashmap](https://github.com/itchenyi/common/tree/master/maps/hashmap) - HashMap
