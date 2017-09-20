@@ -350,9 +350,16 @@ func (r *Request) SetDoNotParseResponse(parse bool) *Request {
 	return r
 }
 
-//
+// ExpectContentType method allows to provide fallback `Content-Type` for automatic unmarshalling
+// when `Content-Type` response header is unavailable.
+func (r *Request) ExpectContentType(contentType string) *Request {
+	r.fallbackContentType = contentType
+	return r
+}
+
+//‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // HTTP verb method starts here
-//
+//___________________________________
 
 // Get method does GET HTTP request. It's defined in section 4.3.1 of RFC7231.
 func (r *Request) Get(url string) (*Response, error) {
@@ -443,6 +450,10 @@ func (r *Request) Execute(method, url string) (*Response, error) {
 
 	return resp, err
 }
+
+//‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// Request Unexported methods
+//___________________________________
 
 func (r *Request) fmtBodyString() (body string) {
 	body = "***** NO CONTENT *****"

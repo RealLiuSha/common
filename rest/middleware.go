@@ -13,11 +13,12 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+	"time"
 )
 
-//
+//‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // Request Middleware(s)
-//
+//___________________________________
 
 func parseRequestURL(c *Client, r *Request) error {
 	// Parsing request URL
@@ -111,8 +112,6 @@ func parseRequestBody(c *Client, r *Request) (err error) {
 				return
 			}
 		}
-	} else {
-		r.Header.Del(hdrContentTypeKey)
 	}
 
 CL:
@@ -205,9 +204,9 @@ func requestLogger(c *Client, r *Request) error {
 	return nil
 }
 
-//
+//‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // Response Middleware(s)
-//
+//___________________________________
 
 func responseLogger(c *Client, res *Response) error {
 	if c.Debug {
@@ -215,7 +214,7 @@ func responseLogger(c *Client, res *Response) error {
 		c.disableLogPrefix()
 		c.Log.Println("---------------------- RESPONSE LOG -----------------------")
 		c.Log.Printf("STATUS 		: %s", res.Status())
-		c.Log.Printf("RECEIVED AT	: %v", res.ReceivedAt())
+		c.Log.Printf("RECEIVED AT	: %v", res.ReceivedAt().Format(time.RFC3339Nano))
 		c.Log.Printf("RESPONSE TIME	: %v", res.Time())
 		c.Log.Println("HEADERS:")
 		for h, v := range res.Header() {
@@ -235,7 +234,7 @@ func responseLogger(c *Client, res *Response) error {
 
 func parseResponseBody(c *Client, res *Response) (err error) {
 	// Handles only JSON or XML content type
-	ct := res.Header().Get(hdrContentTypeKey)
+	ct := firstNonEmpty(res.Header().Get(hdrContentTypeKey), res.Request.fallbackContentType)
 	if IsJSONType(ct) || IsXMLType(ct) {
 		// Considered as Result
 		if res.StatusCode() > 199 && res.StatusCode() < 300 {
